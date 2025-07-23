@@ -17,6 +17,7 @@ namespace miniProject
             {
                 try
                 {
+                    UpdateNotificationCount();
                     LoadTop3Gadgets();
                     LoadGadgetCount();
                     LoadAllGadgets();
@@ -121,6 +122,30 @@ namespace miniProject
             catch (Exception ex)
             {
                 lblGadgetCount.Text = "Error processing gadget: " + ex.Message;
+            }
+        }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
             }
         }
 

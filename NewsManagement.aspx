@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewsManagement.aspx.cs" Inherits="miniProject.NewsManagement" %>
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -8,22 +9,27 @@
 <body>
     <form id="form1" runat="server" enctype="multipart/form-data">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="AdminHome.aspx">Admin</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" href="AdminHome.aspx">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="UserManagement.aspx">User Management</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="NewsManagement.aspx">News Management</a></li>
-                        <li class="nav-item"><a class="nav-link" href="GadgetManagement.aspx">Gadget Management</a></li>
-                        <li class="nav-item"><a class="nav-link" href="CourseManagement.aspx">Course Management</a></li>
-                    </ul>
-                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-outline-light" OnClick="btnLogout_Click" />
-                </div>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="AdminHome.aspx">TechBlog Admin</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="AdminHome.aspx">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="UserManagement.aspx">User Management</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="NewsManagement.aspx">News Management</a></li>
+                    <li class="nav-item"><a class="nav-link" href="GadgetManagement.aspx">Gadget Management</a></li>
+                    <li class="nav-item"><a class="nav-link" href="CourseManagement.aspx">Course Management</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="EmailNotification.aspx">Notification Management</a></li>
+                </ul>
+                <a href="BellIcon.aspx" class="btn btn-outline-light position-relative">🔔
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notificationCount" runat="server">0</span>
+                </a>
+
+                <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-outline-light ms-2" OnClick="btnLogout_Click" />
             </div>
-        </nav>
-         <div id="google_translate_element" style="float: right; margin: 10px;"></div>
+        </div>
+    </nav>
+        <div id="google_translate_element" style="float: right; margin: 10px;"></div>
 
         <div class="container mt-4">
             <h3 class="mb-4">News Management</h3>
@@ -82,18 +88,18 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     </form>
-        <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement(
-      {
-        pageLanguage: 'en',
-        includedLanguages: 'hi,te,en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      },
-      'google_translate_element'
-    );
-  }
-        </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'hi,te,en',
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

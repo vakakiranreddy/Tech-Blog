@@ -17,9 +17,10 @@ namespace miniProject
             {
                 try
                 {
-                    LoadTop3News();         // ✅ Always show
+                    UpdateNotificationCount();
+                    LoadTop3News();         
                     LoadNewsCount();
-                    gvNews.Visible = false; // ✅ Hide grid initially
+                    gvNews.Visible = false;
                 }
                 catch (Exception ex)
                 {
@@ -76,6 +77,30 @@ namespace miniProject
                 lblNewsCount.Text = "Error saving news: " + ex.Message;
             }
         }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
+            }
+        }
 
         protected void gvNews_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
@@ -124,7 +149,7 @@ namespace miniProject
         {
             try
             {
-                gvNews.Visible = true;     // ✅ Show the full news grid
+                gvNews.Visible = true;     
                 LoadTop3News();
                 LoadAllNews();
             }

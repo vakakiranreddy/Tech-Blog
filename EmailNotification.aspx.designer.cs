@@ -11,7 +11,7 @@ namespace miniProject
 {
 
 
-    public partial class CourseManagement
+    public partial class EmailNotification
     {
 
         /// <summary>
@@ -42,102 +42,84 @@ namespace miniProject
         protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
-        /// topCourseCards control.
+        /// txtSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl topCourseCards;
+        protected global::System.Web.UI.WebControls.TextBox txtSubject;
 
         /// <summary>
-        /// lblCourseCount control.
+        /// txtBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCourseCount;
+        protected global::System.Web.UI.WebControls.TextBox txtBody;
 
         /// <summary>
-        /// btnRefreshCourses control.
+        /// btnSend control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRefreshCourses;
+        protected global::System.Web.UI.WebControls.Button btnSend;
 
         /// <summary>
-        /// txtTitle control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTitle;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
-        /// txtProvider control.
+        /// txtSearchSubject control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProvider;
+        protected global::System.Web.UI.WebControls.TextBox txtSearchSubject;
 
         /// <summary>
-        /// txtDescription control.
+        /// btnSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescription;
+        protected global::System.Web.UI.WebControls.Button btnSearch;
 
         /// <summary>
-        /// txtLink control.
+        /// btnViewAll control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLink;
+        protected global::System.Web.UI.WebControls.Button btnViewAll;
 
         /// <summary>
-        /// fileImage control.
+        /// lblTotalCount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fileImage;
+        protected global::System.Web.UI.WebControls.Label lblTotalCount;
 
         /// <summary>
-        /// hdnCourseId control.
+        /// rptNotifications control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdnCourseId;
-
-        /// <summary>
-        /// btnSaveCourse control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSaveCourse;
-
-        /// <summary>
-        /// gvCourses control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvCourses;
+        protected global::System.Web.UI.WebControls.Repeater rptNotifications;
     }
 }

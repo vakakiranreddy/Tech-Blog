@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace miniProject
+namespace YourNamespace
 {
 
 
-    public partial class AdminHome
+    public partial class UserBellIcon
     {
 
         /// <summary>
@@ -42,39 +42,21 @@ namespace miniProject
         protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
-        /// lblUserCount control.
+        /// rptUserNotifications control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUserCount;
+        protected global::System.Web.UI.WebControls.Repeater rptUserNotifications;
 
         /// <summary>
-        /// newsContainer control.
+        /// lblEmptyUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl newsContainer;
-
-        /// <summary>
-        /// gadgetsContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl gadgetsContainer;
-
-        /// <summary>
-        /// coursesContainer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl coursesContainer;
+        protected global::System.Web.UI.WebControls.Label lblEmptyUser;
     }
 }
