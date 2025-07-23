@@ -17,9 +17,10 @@ namespace miniProject
             {
                 try
                 {
-                    LoadTop3Courses();        // ✅ Always show top 3
+                    UpdateNotificationCount();
+                    LoadTop3Courses();        
                     LoadCourseCount();
-                    gvCourses.Visible = false; // ✅ Hide the grid only
+                    gvCourses.Visible = false; 
                 }
                 catch (Exception ex)
                 {
@@ -81,6 +82,30 @@ namespace miniProject
                 lblCourseCount.Text = "Error saving course: " + ex.Message;
             }
         }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
+            }
+        }
 
         protected void gvCourses_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
         {
@@ -91,7 +116,7 @@ namespace miniProject
                 {
                     using (SqlConnection conn = new SqlConnection(connStr))
                     {
-                        SqlCommand cmd = new SqlCommand("SELECT * FROM latestcourses WHERE courseid = @id", conn);
+                        SqlCommand cmd = new SqlCommand("select * from latestcourses where courseid = @id", conn);
                         cmd.Parameters.AddWithValue("@id", id);
                         conn.Open();
                         SqlDataReader reader = cmd.ExecuteReader();
@@ -131,9 +156,9 @@ namespace miniProject
         {
             try
             {
-                gvCourses.Visible = true;   // ✅ Show grid only on button click
+                gvCourses.Visible = true;   
                 LoadTop3Courses();
-                LoadAllCourses();           // Load full course list
+                LoadAllCourses();           
             }
             catch (Exception ex)
             {
@@ -148,12 +173,12 @@ namespace miniProject
                 topCourseCards.Controls.Clear();
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT TOP 3 * FROM latestcourses ORDER BY courseid DESC", conn);
+                    SqlCommand cmd = new SqlCommand("select top 3 * from latestcourses order by courseid DESC", conn);
                     conn.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        string title = reader["title"].ToString();
+                        string title = reader["title"].ToString(); 
                         string desc = reader["description"].ToString();
                         string provider = reader["provider"].ToString();
                         string link = reader["link"].ToString();
@@ -189,7 +214,7 @@ namespace miniProject
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM latestcourses ORDER BY courseid DESC", conn);
+                    SqlCommand cmd = new SqlCommand("select * from latestcourses order by courseid desc", conn);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
@@ -209,7 +234,7 @@ namespace miniProject
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM latestcourses", conn);
+                    SqlCommand cmd = new SqlCommand("select count(*) from latestcourses", conn);
                     conn.Open();
                     int count = (int)cmd.ExecuteScalar();
                     lblCourseCount.Text = "Total Courses: " + count;

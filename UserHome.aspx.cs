@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 
@@ -9,6 +10,7 @@ namespace miniProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 if (Session["Role"] == null || Session["Role"].ToString() != "user")
@@ -16,7 +18,15 @@ namespace miniProject
                     Response.Redirect("Login.aspx");
                     return;
                 }
-
+                if (Session["FullName"] != null)
+                {
+                    lblWelcome.Text = "Welcome to " + Session["Email"].ToString();
+                }
+                else
+                {
+                    lblWelcome.Text = "Welcome, User";
+                }
+                UpdateNotificationCount();
                 LoadNews();
                 LoadGadgets();
                 LoadCourses();
@@ -96,6 +106,30 @@ namespace miniProject
             catch (Exception)
             {
                 // Handle errors silently or log
+            }
+        }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
             }
         }
 

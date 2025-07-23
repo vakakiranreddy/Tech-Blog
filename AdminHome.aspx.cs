@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
 
@@ -16,7 +17,7 @@ namespace miniProject
                     Response.Redirect("UserHome.aspx");
                     return;
                 }
-
+                UpdateNotificationCount();
                 LoadUserCount();
                 LoadNews();
                 LoadGadgets();
@@ -46,6 +47,30 @@ namespace miniProject
             catch (Exception)
             {
                 lblUserCount.Text = "N/A";
+            }
+        }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
             }
         }
 
@@ -80,7 +105,7 @@ namespace miniProject
             }
             catch (Exception)
             {
-                // Optional: show fallback or log error
+                
             }
         }
 
@@ -115,7 +140,7 @@ namespace miniProject
             }
             catch (Exception)
             {
-                // Optional: show fallback or log error
+               
             }
         }
 
@@ -150,7 +175,7 @@ namespace miniProject
             }
             catch (Exception)
             {
-                // Optional: show fallback or log error
+                
             }
         }
     }

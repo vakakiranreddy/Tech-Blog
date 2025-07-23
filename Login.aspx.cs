@@ -18,7 +18,7 @@ namespace miniProject
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                SqlCommand cmd = new SqlCommand("loginuser", conn); // lowercase name
+                SqlCommand cmd = new SqlCommand("loginuser", conn); 
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@email", email);
                 cmd.Parameters.AddWithValue("@passwordhash", hashedPassword);
@@ -30,14 +30,15 @@ namespace miniProject
 
                     if (roleObj != null)
                     {
-                        string role = roleObj.ToString().ToLower(); // normalize role string
+                        string role = roleObj.ToString().ToLower();
                         Session["Email"] = email;
                         Session["Role"] = role;
+                       
 
                         if (role == "admin")
                             Response.Redirect("AdminHome.aspx");
                         else
-                            Response.Redirect("UserHome.aspx"); // updated name
+                            Response.Redirect("UserHome.aspx"); 
                     }
                     else
                     {

@@ -16,6 +16,7 @@ namespace miniProject
             {
                 try
                 {
+                    UpdateNotificationCount();
                     LoadUsers();
                     LoadUserCount();
                 }
@@ -47,21 +48,58 @@ namespace miniProject
             }
         }
 
+        
+
         private void LoadUserCount()
         {
             try
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM users", conn);
+                    SqlCommand cmd = new SqlCommand("sp_GetUserCount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    
+                    SqlParameter outParam = new SqlParameter("@TotalCount", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(outParam);
+
                     conn.Open();
-                    int count = (int)cmd.ExecuteScalar();
+                    cmd.ExecuteNonQuery();
+
+         
+                    int count = Convert.ToInt32(outParam.Value);
                     lblUserCount.Text = "Total Users: " + count;
                 }
             }
             catch (Exception ex)
             {
                 lblUserCount.Text = "Error getting user count: " + ex.Message;
+            }
+        }
+
+
+        private void LoadUsersBySortOption(string sortOption)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sortusersby", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@sortOption", sortOption);
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    gvUsers.DataSource = dt;
+                    gvUsers.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblUserCount.Text = "Error sorting users: " + ex.Message;
             }
         }
 
@@ -81,7 +119,15 @@ namespace miniProject
                         cmd.ExecuteNonQuery();
                     }
 
-                    LoadUsers();
+                    // Maintain the current sort order after deletion
+                    if (ddlSortBy.SelectedValue != "Default")
+                    {
+                        LoadUsersBySortOption(ddlSortBy.SelectedValue);
+                    }
+                    else
+                    {
+                        LoadUsers();
+                    }
                     LoadUserCount();
                 }
             }
@@ -107,10 +153,36 @@ namespace miniProject
                     gvUsers.DataSource = dt;
                     gvUsers.DataBind();
                 }
+                
+                ddlSortBy.SelectedValue = "Default";
             }
             catch (Exception ex)
             {
                 lblUserCount.Text = "Error searching user: " + ex.Message;
+            }
+        }
+        private void UpdateNotificationCount()
+        {
+            try
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    SqlCommand cmd = new SqlCommand("sp_getnotificationcount", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    conn.Open();
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        notificationCount.InnerText = result.ToString();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                notificationCount.InnerText = "0";
             }
         }
 
@@ -119,12 +191,35 @@ namespace miniProject
             try
             {
                 txtSearchUser.Text = "";
+                ddlSortBy.SelectedValue = "Default";
                 LoadUsers();
                 LoadUserCount();
             }
             catch (Exception ex)
             {
                 lblUserCount.Text = "Error refreshing users: " + ex.Message;
+            }
+        }
+
+        protected void btnSortUsers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string sortOption = ddlSortBy.SelectedValue;
+                if (sortOption == "Default")
+                {
+                    LoadUsers();
+                }
+                else
+                {
+                    LoadUsersBySortOption(sortOption);
+                }
+                // Clear search text when sorting
+                txtSearchUser.Text = "";
+            }
+            catch (Exception ex)
+            {
+                lblUserCount.Text = "Error sorting users: " + ex.Message;
             }
         }
 

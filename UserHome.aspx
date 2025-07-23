@@ -40,22 +40,27 @@
 <body>
     <form id="form1" runat="server">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="UserHome.aspx">TechBlog</a>
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#newsSection">Tech News</a></li>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="AdminHome.aspx">TechBlog</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#newsSection">Tech News</a></li>
                         <li class="nav-item"><a class="nav-link" href="#gadgetSection">Gadgets</a></li>
                         <li class="nav-item"><a class="nav-link" href="#courseSection">Courses</a></li>
-                    </ul>
-                    <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-outline-light" OnClick="btnLogout_Click" />
-                </div>
+                </ul>
+                <a href="BellIcon.aspx" class="btn btn-outline-light position-relative">🔔
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notificationCount" runat="server">0</span>
+                </a>
+
+                <asp:Button ID="btnLogout" runat="server" Text="Logout" CssClass="btn btn-outline-light ms-2" OnClick="btnLogout_Click" />
             </div>
-        </nav>
+        </div>
+    </nav>
          <div id="google_translate_element" style="float: right; margin: 10px;"></div>
         <div class="container mt-4">
-            <h2 class="mb-4 text-center">Welcome to TechBlog 👋</h2>
+           <asp:Label ID="lblWelcome" runat="server" CssClass="mb-4 text-center h4 d-block"></asp:Label>
+
 
             <!-- Tech News Section -->
             <h4 class="mb-3" id="newsSection">Latest Tech News</h4>

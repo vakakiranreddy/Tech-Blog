@@ -121,8 +121,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="CourseManagement.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="EmailNotification.aspx" />
     <Content Include="GadgetManagement.aspx" />
     <Content Include="NewsManagement.aspx" />
+    <Content Include="BellIcon.aspx" />
     <Content Include="UserHome.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -228,6 +230,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmailNotification.aspx.cs">
+      <DependentUpon>EmailNotification.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmailNotification.aspx.designer.cs">
+      <DependentUpon>EmailNotification.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GadgetManagement.aspx.cs">
       <DependentUpon>GadgetManagement.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -241,6 +250,13 @@
     </Compile>
     <Compile Include="NewsManagement.aspx.designer.cs">
       <DependentUpon>NewsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BellIcon.aspx.cs">
+      <DependentUpon>BellIcon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BellIcon.aspx.designer.cs">
+      <DependentUpon>BellIcon.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserHome.aspx.cs">
       <DependentUpon>UserHome.aspx</DependentUpon>
