@@ -65,6 +65,7 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item"><a class="nav-link active" href="AdminHome.aspx">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="UserManagement.aspx">User Management</a></li>
+                        <li class="nav-item"><a class="nav-link" href="UserManagement.aspx">User Management</a></li>
                         <li class="nav-item"><a class="nav-link" href="NewsManagement.aspx">News Management</a></li>
                         <li class="nav-item"><a class="nav-link" href="GadgetManagement.aspx">Gadget Management</a></li>
                         <li class="nav-item"><a class="nav-link" href="CourseManagement.aspx">Course Management</a></li>
